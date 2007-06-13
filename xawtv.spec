@@ -1,7 +1,7 @@
 Summary:	A X11 program for watching TV
 Name:		xawtv
 Version:	3.95
-%define	rel     4
+%define	rel     5
 %define	release %mkrel %rel
 %define mkrel_fixed(c:) %{-c: 0.%{-c*}.}%{!?_with_unstable:%(perl -e '$_="%{1}";m/(\\d+)$/;$rel=${1}-1;re;print "$rel";').%{?subrel:%subrel}%{!?subrel:1}.%{?distversion:%distversion}%{?!distversion:%(echo $[%{mdkversion}/10])}}%{?_with_unstable:%{1}}%{?distsuffix:%distsuffix}%{?!distsuffix:mdk}
 Release:	%{release}
@@ -187,7 +187,7 @@ Subpage "00" can be used for pages without subpages.
 		--enable-xvideo \
 		--enable-aa \
 		--enable-alsa \
-                --disable-quicktime \
+		--disable-quicktime \
 		--x-includes=%{_includedir}/freetype2
 
 # Quicktime support not enabled, so libpng is not needed
