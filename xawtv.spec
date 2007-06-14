@@ -40,10 +40,11 @@ BuildRequires:	libxxf86dga-devel
 BuildRequires:	libxrandr-devel
 BuildRequires:	libdv-devel
 BuildRequires:	liblirc-devel
-# we need some package that creates /etc/X11 directory (in this case I
-# chose x11-server-xorg) as BuildRequires, otherwise xawtv configure
-# doesn't find it and sets it to /usr/X11R6/lib/X11
-BuildRequires:	x11-server-xorg
+# FIXME: we need some package that creates /etc/X11/app-defaults
+# directory (in this case I chose xscreensaver-common) as
+# BuildRequires, otherwise xawtv configure doesn't find it and sets
+# it to /usr/X11R6/lib/X11
+BuildRequires:	xscreensaver-common
 
 Requires:	common-licenses
 Requires:	xawtv-common = %version
