@@ -1,7 +1,7 @@
 Summary:	A X11 program for watching TV
 Name:		xawtv
 Version:	3.95
-%define	rel     5
+%define	rel     6
 %define	release %mkrel %rel
 %define mkrel_fixed(c:) %{-c: 0.%{-c*}.}%{!?_with_unstable:%(perl -e '$_="%{1}";m/(\\d+)$/;$rel=${1}-1;re;print "$rel";').%{?subrel:%subrel}%{!?subrel:1}.%{?distversion:%distversion}%{?!distversion:%(echo $[%{mdkversion}/10])}}%{?_with_unstable:%{1}}%{?distsuffix:%distsuffix}%{?!distsuffix:mdk}
 Release:	%{release}
@@ -40,11 +40,7 @@ BuildRequires:	libxxf86dga-devel
 BuildRequires:	libxrandr-devel
 BuildRequires:	libdv-devel
 BuildRequires:	liblirc-devel
-# FIXME: we need some package that creates /etc/X11/app-defaults
-# directory (in this case I chose xscreensaver-common) as
-# BuildRequires, otherwise xawtv configure doesn't find it and sets
-# it to /usr/X11R6/lib/X11
-BuildRequires:	xscreensaver-common
+BuildRequires:	x11-server-common
 
 Requires:	common-licenses
 Requires:	xawtv-common = %version
