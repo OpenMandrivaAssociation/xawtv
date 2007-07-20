@@ -1,17 +1,16 @@
 Summary:	A X11 program for watching TV
 Name:		xawtv
 Version:	3.95
-%define	rel     6
+%define	rel     7
 %define	release %mkrel %rel
-%define mkrel_fixed(c:) %{-c: 0.%{-c*}.}%{!?_with_unstable:%(perl -e '$_="%{1}";m/(\\d+)$/;$rel=${1}-1;re;print "$rel";').%{?subrel:%subrel}%{!?subrel:1}.%{?distversion:%distversion}%{?!distversion:%(echo $[%{mdkversion}/10])}}%{?_with_unstable:%{1}}%{?distsuffix:%distsuffix}%{?!distsuffix:mdk}
 Release:	%{release}
 Source0:	%{name}-%{version}.tar.bz2
 Source2:	%{name}
-Patch0:		xawtv-3.84-fixes.patch.bz2
-Patch1:		xawtv-3.74-ia64.patch.bz2
-Patch10:	xawtv-3.94-gcc4.patch.bz2
-Patch20:	xawtv-3.94-quicktime.patch.bz2
-Patch21:	xawtv-3.95-xorg71.patch.bz2
+Patch0:		xawtv-3.84-fixes.patch
+Patch1:		xawtv-3.74-ia64.patch
+Patch10:	xawtv-3.94-gcc4.patch
+Patch20:	xawtv-3.94-quicktime.patch
+Patch21:	xawtv-3.95-xorg71.patch
 Group:		Video
 License:	GPL
 #OLD_STILL_VALID_URLs: http://www.strusel007.de/linux/xawtv/
@@ -20,13 +19,11 @@ URL:		http://linux.bytesex.org/xawtv/
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	MesaGLU-devel
 BuildRequires:	aalib-devel
-BuildRequires:	glibc => 2.3.1-4mdk
 BuildRequires:	gpm-devel
 BuildRequires:	lesstif-devel
 BuildRequires:	alsa-lib-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libzvbi-devel >= 0.2.1
-BuildRequires:	make => 3.79.1-11mdk
 BuildRequires:	ncurses-devel
 BuildRequires:	recode
 BuildRequires:	slang-devel
@@ -44,13 +41,11 @@ BuildRequires:	x11-server-common
 
 Requires:	common-licenses
 Requires:	xawtv-common = %version
-Conflicts:	dynamic < 0.20-1mdk
 
 %package	common
 Summary:	Common files for fbtv/motv/ttv/xawtv
 Group:		Video
 Requires:	tv-fonts
-Conflicts:	xawtv <= 3.74-3mdk
 
 %package	control
 Summary:	Control video4linux devices
@@ -100,8 +95,8 @@ It uses the Athena widgets.
 MoTV has a nicer GUI which use lesstif (motif) widgets.
 
 %description	common
-These're common files for fbtv, motv, ttv and xawtv.
-There're:
+These are common files for fbtv, motv, ttv and xawtv.
+They are:
  * scantv: small text program that look for tv channels
  * streamer - capture tool (images / movies)
 
@@ -117,7 +112,7 @@ V4lctl is a command line tool that sets the parameters directly.
 Fbtv is a program for watching TV with your linux box.
 It runs on top of a graphic framebuffer device (/dev/fb0).
 
-The pro is that you don't need X11 in order to watch tv.
+This is useful for watching TV without X11.
 
 fbtv shares the config file ($HOME/.xawtv) with the xawtv
 application.
@@ -126,9 +121,9 @@ Check the xawtv(1) manpage for details about the config file format.
 
 
 %description	misc
-This package has a few tools you might find useful.  They
-have not to do very much to do with xawtv.  I've used/wrote
-them for debugging:
+This package has a few tools you might find useful. They
+have not to do very much to do with xawtv. They were written
+for debugging:
  * dump-mixers - dump mixer settings to stdout
  * propwatch   - monitors properties of X11 windows.  If you
                  want to know how to keep track of xawtv's
@@ -145,7 +140,7 @@ them for debugging:
 %description -n	motv
 This is a motv-based Video4Linux capture viewer.
 
-It is basically xawtv with a more userfriendly GUI.
+It is basically xawtv with a more user-friendly GUI.
 It has the same features, uses the same config file, has the same command
 line switches, you can control it using xawtv-remote.
 Most keyboards shortcuts are identical too.
@@ -193,13 +188,13 @@ Subpage "00" can be used for pages without subpages.
 
 # Quicktime support not enabled, so libpng is not needed
 find . -name 'Makefile' | xargs perl -pi -e 's/-lpng//g'
-make
+%make
 
 %install
 rm -fr $RPM_BUILD_ROOT
 perl -pi -e 's!-o root -g root!!g' src/Makefile
 mkdir -p $RPM_BUILD_ROOT/usr/lib/X11/app-defaults
- %makeinstall_std ROOT="$RPM_BUILD_ROOT" FONTDIR=$RPM_BUILD_ROOT/%_libdir/X11/fonts/misc SUID_ROOT=""
+ %makeinstall_std ROOT="$RPM_BUILD_ROOT" FONTDIR=$RPM_BUILD_ROOT/%_datadir/fonts/misc SUID_ROOT=""
 
 install -m 644 x11/Xawtv.ad $RPM_BUILD_ROOT/usr/lib/X11/app-defaults
 (cd $RPM_BUILD_ROOT/usr/lib/X11/app-defaults; ln Xawtv.ad Xawtv; ln Xawtv.ad Xawtv-color)
@@ -207,17 +202,32 @@ install -m 644 x11/Xawtv.ad $RPM_BUILD_ROOT/usr/lib/X11/app-defaults
 install -m 755 %SOURCE2 $RPM_BUILD_ROOT/%_bindir/XawTV
 
 # Menu entries
-mkdir -p $RPM_BUILD_ROOT/%_menudir
 
-cat > $RPM_BUILD_ROOT%_menudir/motv <<EOF
-?package(motv): command="motv" icon="video_section.png" section="Multimedia/Video" \
-title="MoTV" longtitle="A program for watching TV" \
-needs="x11" xdg="true"
+mkdir -p %{buildroot}%{_datadir}/applications
+cat > %{buildroot}%{_datadir}/applications/mandriva-%{name}.desktop <<EOF
+[Desktop Entry]
+Encoding=UTF-8
+Name=XawTV
+Comment=A program for watching TV
+Exec=%{_bindir}/XawTV
+Icon=video_section.png
+Terminal=false
+Type=Application
+StartupNotify=true
+Categories=AudioVideo;Video;TV;
 EOF
-cat > $RPM_BUILD_ROOT%_menudir/xawtv <<EOF
-?package(xawtv): command="XawTV" icon="video_section.png" section="Multimedia/Video" \
-title="XawTV" longtitle="The X11 Video4Linux Stream Capture Viewer" \
-needs="x11" xdg="true"
+
+cat > %{buildroot}%{_datadir}/applications/mandriva-motv.desktop <<EOF
+[Desktop Entry]
+Encoding=UTF-8
+Name=MoTV
+Comment=A program for watching TV (nicer interface)
+Exec=%{_bindir}/motv
+Icon=video_section.png
+Terminal=false
+Type=Application
+StartupNotify=true
+Categories=Motif;AudioVideo;Video;TV;
 EOF
 
 # dynamic desktop support
@@ -263,7 +273,6 @@ if [ $1 = 0 ]; then
   update-alternatives --remove tvtuner.kde.dynamic %tvtuner_launcher/%name.desktop
   update-alternatives --remove tvtuner.gnome.dynamic %tvtuner_launcher/%name.desktop
 fi
-
 %clean_menus
 
 %post -n motv
@@ -284,7 +293,7 @@ rm -rf $RPM_BUILD_ROOT
 %_bindir/XawTV
 %_mandir/man1/xawtv.1*
 %_mandir/fr/man1/xawtv.1*
-%_menudir/xawtv
+%{_datadir}/applications/mandriva-%{name}.desktop
 /usr/lib/X11/app-defaults/Xawtv*
 %_datadir/%name
 
@@ -351,7 +360,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(-,root,root)
 %_bindir/motv
 %_mandir/man1/motv*
-%_menudir/motv
+%{_datadir}/applications/mandriva-motv.desktop
 %config(noreplace) %_sysconfdir/X11/app-defaults/MoTV
 %config(noreplace) %_sysconfdir/X11/de_DE.UTF-8/app-defaults/MoTV
 %config(noreplace) %_sysconfdir/X11/de/app-defaults/MoTV
