@@ -206,7 +206,6 @@ install -m 755 %SOURCE2 $RPM_BUILD_ROOT/%_bindir/XawTV
 mkdir -p %{buildroot}%{_datadir}/applications
 cat > %{buildroot}%{_datadir}/applications/mandriva-%{name}.desktop <<EOF
 [Desktop Entry]
-Encoding=UTF-8
 Name=XawTV
 Comment=A program for watching TV
 Exec=%{_bindir}/XawTV
@@ -219,7 +218,6 @@ EOF
 
 cat > %{buildroot}%{_datadir}/applications/mandriva-motv.desktop <<EOF
 [Desktop Entry]
-Encoding=UTF-8
 Name=MoTV
 Comment=A program for watching TV (nicer interface)
 Exec=%{_bindir}/motv
@@ -237,7 +235,6 @@ EOF
 mkdir -p $RPM_BUILD_ROOT{%tvtuner_launcher,%webcam_launcher}
 cat > $RPM_BUILD_ROOT%webcam_launcher/%name.desktop << EOF
 [Desktop Entry]
-Encoding=UTF-8
 Name=XawTV \$devicename
 Comment=The X11 Video4Linux Stream Capture Viewer
 TryExec=/usr/bin/xawtv
@@ -248,7 +245,6 @@ Type=Application
 EOF
 cat > $RPM_BUILD_ROOT%tvtuner_launcher/%name.desktop << EOF
 [Desktop Entry]
-Encoding=UTF-8
 Name=XawTV \$devicename
 Comment=The X11 Video4Linux Stream Capture Viewer
 TryExec=/usr/bin/XawTV
