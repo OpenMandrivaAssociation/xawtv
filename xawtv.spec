@@ -209,7 +209,7 @@ cat > %{buildroot}%{_datadir}/applications/mandriva-%{name}.desktop <<EOF
 Name=XawTV
 Comment=A program for watching TV
 Exec=%{_bindir}/XawTV
-Icon=video_section.png
+Icon=video_section
 Terminal=false
 Type=Application
 StartupNotify=true
@@ -221,7 +221,7 @@ cat > %{buildroot}%{_datadir}/applications/mandriva-motv.desktop <<EOF
 Name=MoTV
 Comment=A program for watching TV (nicer interface)
 Exec=%{_bindir}/motv
-Icon=video_section.png
+Icon=video_section
 Terminal=false
 Type=Application
 StartupNotify=true
@@ -240,7 +240,7 @@ Comment=The X11 Video4Linux Stream Capture Viewer
 TryExec=/usr/bin/xawtv
 Exec=/usr/bin/xawtv -c \$device
 Terminal=false
-Icon=video_section.png
+Icon=video_section
 Type=Application
 EOF
 cat > $RPM_BUILD_ROOT%tvtuner_launcher/%name.desktop << EOF
@@ -250,7 +250,7 @@ Comment=The X11 Video4Linux Stream Capture Viewer
 TryExec=/usr/bin/XawTV
 Exec=/usr/bin/XawTV -c \$device
 Terminal=false
-Icon=video_section.png
+Icon=video_section
 Type=Application
 EOF
 
