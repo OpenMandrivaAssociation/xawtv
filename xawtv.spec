@@ -258,7 +258,9 @@ update-alternatives --install %webcam_launcher/gnome.desktop webcam.gnome.dynami
 update-alternatives --install %webcam_launcher/kde.desktop webcam.kde.dynamic %webcam_launcher/%name.desktop 20
 update-alternatives --install %tvtuner_launcher/kde.desktop tvtuner.kde.dynamic %tvtuner_launcher/%name.desktop 20
 update-alternatives --install %tvtuner_launcher/gnome.desktop tvtuner.gnome.dynamic %tvtuner_launcher/%name.desktop 20
+%if %mdkversion < 200900
 %update_menus
+%endif
 
 %postun
 if [ $1 = 0 ]; then
@@ -267,13 +269,19 @@ if [ $1 = 0 ]; then
   update-alternatives --remove tvtuner.kde.dynamic %tvtuner_launcher/%name.desktop
   update-alternatives --remove tvtuner.gnome.dynamic %tvtuner_launcher/%name.desktop
 fi
+%if %mdkversion < 200900
 %clean_menus
+%endif
 
+%if %mdkversion < 200900
 %post -n motv
 %update_menus
+%endif
 
+%if %mdkversion < 200900
 %postun -n motv
 %clean_menus 
+%endif
 
 %clean
 rm -rf $RPM_BUILD_ROOT
