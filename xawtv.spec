@@ -1,7 +1,11 @@
+# FIXME: Workaround build errors with underlinking, try to make a proper
+# fix later
+%define _disable_ld_no_undefined 1
+
 Summary:	A X11 program for watching TV
 Name:		xawtv
 Version:	3.95
-Release:	%mkrel 10
+Release:	%mkrel 9
 Source0:	%{name}-%{version}.tar.bz2
 Source2:	%{name}
 Patch0:		xawtv-3.84-fixes.patch
@@ -9,6 +13,7 @@ Patch1:		xawtv-3.74-ia64.patch
 Patch10:	xawtv-3.94-gcc4.patch
 Patch20:	xawtv-3.94-quicktime.patch
 Patch21:	xawtv-3.95-xorg71.patch
+Patch22:	xawtv-3.95-page_h.patch
 Group:		Video
 License:	GPL
 #OLD_STILL_VALID_URLs: http://www.strusel007.de/linux/xawtv/
@@ -176,6 +181,8 @@ Subpage "00" can be used for pages without subpages.
 %patch10 -p0
 %patch20 -p0
 %patch21 -p0
+%patch22 -p1
+
 %build
 %configure	--enable-xfree-ext \
 		--enable-xvideo \
