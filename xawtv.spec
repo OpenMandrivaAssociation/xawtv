@@ -5,11 +5,12 @@
 Summary:	A X11 program for watching TV
 Name:		xawtv
 Version:	3.95
-Release:	%mkrel 9
+Release:	%mkrel 10
 Source0:	%{name}-%{version}.tar.bz2
 Source2:	%{name}
 Patch0:		xawtv-3.84-fixes.patch
 Patch1:		xawtv-3.74-ia64.patch
+Patch2:		xawtv-3.95-fixes.patch
 Patch10:	xawtv-3.94-gcc4.patch
 Patch20:	xawtv-3.94-quicktime.patch
 Patch21:	xawtv-3.95-xorg71.patch
@@ -178,6 +179,7 @@ Subpage "00" can be used for pages without subpages.
 %setup -q
 %patch0 -p0
 %patch1 -p1
+%patch2 -p1
 %patch10 -p0
 %patch20 -p0
 %patch21 -p0
