@@ -5,12 +5,15 @@
 Summary:	A X11 program for watching TV
 Name:		xawtv
 Version:	3.95
-Release:	%mkrel 10
+Release:	%mkrel 11
 Source0:	%{name}-%{version}.tar.bz2
 Source2:	%{name}
 Patch0:		xawtv-3.84-fixes.patch
 Patch1:		xawtv-3.74-ia64.patch
 Patch2:		xawtv-3.95-fixes.patch
+Patch3:		xawtv-3.95-libv4l2.patch
+Patch4:		xawtv-3.95-no-dga.patch
+Patch5:		xawtv-3.95-v4l-conf-user-bpl.patch
 Patch10:	xawtv-3.94-gcc4.patch
 Patch20:	xawtv-3.94-quicktime.patch
 Patch21:	xawtv-3.95-xorg71.patch
@@ -41,6 +44,7 @@ BuildRequires:	libxxf86dga-devel
 BuildRequires:	libxrandr-devel
 BuildRequires:	libdv-devel
 BuildRequires:	liblirc-devel
+BuildRequires:	libv4l-devel
 BuildRequires:	x11-server-common
 
 Requires:	common-licenses
@@ -180,6 +184,9 @@ Subpage "00" can be used for pages without subpages.
 %patch0 -p0
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
+%patch4 -p1
+%patch5 -p1
 %patch10 -p0
 %patch20 -p0
 %patch21 -p0
