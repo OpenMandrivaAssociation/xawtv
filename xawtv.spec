@@ -5,7 +5,7 @@
 Summary:	A X11 program for watching TV
 Name:		xawtv
 Version:	3.95
-Release:	%mkrel 11
+Release:	%mkrel 12
 Source0:	%{name}-%{version}.tar.bz2
 Source2:	%{name}
 Patch0:		xawtv-3.84-fixes.patch
