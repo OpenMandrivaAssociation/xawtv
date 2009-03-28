@@ -8,8 +8,8 @@ Version:	3.95
 Release:	%mkrel 12
 Source0:	%{name}-%{version}.tar.bz2
 Source2:	%{name}
-Patch0:		xawtv-3.84-fixes.patch
-Patch1:		xawtv-3.74-ia64.patch
+Patch0:		xawtv-3.95-includes.patch
+Patch1:		xawtv-3.95-ia64.patch
 Patch2:		xawtv-3.95-fixes.patch
 Patch3:		xawtv-3.95-libv4l2.patch
 Patch4:		xawtv-3.95-no-dga.patch
@@ -193,7 +193,7 @@ Subpage "00" can be used for pages without subpages.
 %patch22 -p1
 
 %build
-%configure	--enable-xfree-ext \
+%configure2_5x	--enable-xfree-ext \
 		--enable-xvideo \
 		--enable-aa \
 		--enable-alsa \
