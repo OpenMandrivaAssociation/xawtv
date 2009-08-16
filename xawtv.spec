@@ -46,6 +46,7 @@ BuildRequires:	libdv-devel
 BuildRequires:	liblirc-devel
 BuildRequires:	libv4l-devel
 BuildRequires:	x11-server-common
+BuildRequires:	libxp-devel
 
 Requires:	common-licenses
 Requires:	xawtv-common = %version
