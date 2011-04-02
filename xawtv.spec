@@ -4,20 +4,12 @@
 
 Summary:	A X11 program for watching TV
 Name:		xawtv
-Version:	3.95
-Release:	%mkrel 15
-Source0:	%{name}-%{version}.tar.bz2
+Version:	3.100
+Release:	%mkrel 1
+Source0:	http://linuxtv.org/downloads/xawtv/%{name}-%{version}.tar.bz2
 Source2:	%{name}
-Patch0:		xawtv-3.95-includes.patch
-Patch1:		xawtv-3.95-ia64.patch
-Patch2:		xawtv-3.95-fixes.patch
-Patch3:		xawtv-3.95-libv4l2.patch
-Patch4:		xawtv-3.95-no-dga.patch
-Patch5:		xawtv-3.95-v4l-conf-user-bpl.patch
-Patch10:	xawtv-3.94-gcc4.patch
-Patch20:	xawtv-3.94-quicktime.patch
-Patch21:	xawtv-3.95-xorg71.patch
-Patch22:	xawtv-3.95-page_h.patch
+Patch30:	xawtv-3.100-link.patch
+Patch31:	xawtv-3.100-glibc.patch
 Group:		Video
 License:	GPL
 #OLD_STILL_VALID_URLs: http://www.strusel007.de/linux/xawtv/
@@ -182,18 +174,11 @@ Subpage "00" can be used for pages without subpages.
 
 %prep
 %setup -q
-%patch0 -p0
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
-%patch5 -p1
-%patch10 -p0
-%patch20 -p0
-%patch21 -p0
-%patch22 -p1
+%patch30 -p0
+%patch31 -p0
 
 %build
+autoreconf -fi
 %configure2_5x	--enable-xfree-ext \
 		--enable-xvideo \
 		--enable-aa \
@@ -203,7 +188,7 @@ Subpage "00" can be used for pages without subpages.
 
 # Quicktime support not enabled, so libpng is not needed
 find . -name 'Makefile' | xargs perl -pi -e 's/-lpng//g'
-%make
+%make CC="gcc %ldflags"
 
 %install
 rm -fr $RPM_BUILD_ROOT
@@ -381,10 +366,7 @@ rm -rf $RPM_BUILD_ROOT
 %_mandir/man1/motv*
 %{_datadir}/applications/mandriva-motv.desktop
 %config(noreplace) %_sysconfdir/X11/app-defaults/MoTV
-%config(noreplace) %_sysconfdir/X11/de_DE.UTF-8/app-defaults/MoTV
-%config(noreplace) %_sysconfdir/X11/de/app-defaults/MoTV
-%config(noreplace) %_sysconfdir/X11/fr/app-defaults/MoTV
-%config(noreplace) %_sysconfdir/X11/it/app-defaults/MoTV
+%config(noreplace) %_sysconfdir/X11/*/app-defaults/MoTV
 
 %files -n radio
 %defattr(-,root,root)
