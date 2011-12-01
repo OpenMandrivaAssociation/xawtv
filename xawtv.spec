@@ -191,15 +191,15 @@ find . -name 'Makefile' | xargs perl -pi -e 's/-lpng//g'
 %make CC="gcc %ldflags"
 
 %install
-rm -fr $RPM_BUILD_ROOT
+rm -fr %{buildroot}
 perl -pi -e 's!-o root -g root!!g' src/Makefile
-mkdir -p $RPM_BUILD_ROOT/usr/lib/X11/app-defaults
- %makeinstall_std ROOT="$RPM_BUILD_ROOT" FONTDIR=$RPM_BUILD_ROOT/%_datadir/fonts/misc SUID_ROOT=""
+mkdir -p %{buildroot}/usr/lib/X11/app-defaults
+ %makeinstall_std ROOT="%{buildroot}" FONTDIR=%{buildroot}/%_datadir/fonts/misc SUID_ROOT=""
 
-install -m 644 x11/Xawtv.ad $RPM_BUILD_ROOT/usr/lib/X11/app-defaults
-(cd $RPM_BUILD_ROOT/usr/lib/X11/app-defaults; ln Xawtv.ad Xawtv; ln Xawtv.ad Xawtv-color)
+install -m 644 x11/Xawtv.ad %{buildroot}/usr/lib/X11/app-defaults
+(cd %{buildroot}/usr/lib/X11/app-defaults; ln Xawtv.ad Xawtv; ln Xawtv.ad Xawtv-color)
 
-install -m 755 %SOURCE2 $RPM_BUILD_ROOT/%_bindir/XawTV
+install -m 755 %SOURCE2 %{buildroot}/%_bindir/XawTV
 
 # Menu entries
 
@@ -232,8 +232,8 @@ EOF
 %define webcam_launcher /etc/dynamic/launchers/webcam
 %define tvtuner_launcher /etc/dynamic/launchers/tvtuner
 
-mkdir -p $RPM_BUILD_ROOT{%tvtuner_launcher,%webcam_launcher}
-cat > $RPM_BUILD_ROOT%webcam_launcher/%name.desktop << EOF
+mkdir -p %{buildroot}{%tvtuner_launcher,%webcam_launcher}
+cat > %{buildroot}%webcam_launcher/%name.desktop << EOF
 [Desktop Entry]
 Name=XawTV \$devicename
 Comment=The X11 Video4Linux Stream Capture Viewer
@@ -243,7 +243,7 @@ Terminal=false
 Icon=video_section
 Type=Application
 EOF
-cat > $RPM_BUILD_ROOT%tvtuner_launcher/%name.desktop << EOF
+cat > %{buildroot}%tvtuner_launcher/%name.desktop << EOF
 [Desktop Entry]
 Name=XawTV \$devicename
 Comment=The X11 Video4Linux Stream Capture Viewer
@@ -286,7 +286,7 @@ fi
 %endif
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
