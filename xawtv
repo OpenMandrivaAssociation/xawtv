@@ -1,0 +1,26 @@
+#!/bin/sh
+#   MandrakeSoft XawTV wrapper :
+#   run scantv if there'sn't any config file
+#   (c) 2001-2002 Thierry Vignaud <tvignaud@mandrakesoft.com> for MandrakeSoft
+#   Released under the GNU GPL v2
+
+USER_RC=~/.xawtv
+
+if [ ! -e /usr/X11R6/lib/X11/xawtvrc -a ! -e $USER_RC ];then
+    for path in /usr/bin/ /usr/bin/X11 /usr/sbin; do
+	   if [[ -x $path/drakxtv ]]; then
+		  drakxtv=$path/drakxtv; break
+	   fi
+    done
+    if [[ -z $drakxtv ]]; then
+	   if [[ -x /usr/X11R6/bin/xvt ]]; then
+		  drakxtv="xvt -title 'Scanning for TV channels ...' -e scantv -o $HOME/.xawtv"
+	   else  drakxtv="scantv -o $HOME/.xawtv"
+	   fi
+    fi
+    eval $drakxtv
+fi
+
+# dynamic/hotplug run this scrit with webcams, thus scantv failled
+touch $USER_RC
+exec xawtv "$@"
