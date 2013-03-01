@@ -13,6 +13,7 @@ License:	GPL
 URL:		http://linux.bytesex.org/xawtv/
 Source0:	http://linuxtv.org/downloads/xawtv/%{name}-%{version}.tar.bz2
 Source2:	%{name}
+Patch0:		xawtv-3.102-no-libXp.patch
 Patch31:	xawtv-3.100-glibc.patch
 BuildRequires:	aalib-devel
 BuildRequires:	gpm-devel
@@ -36,7 +37,6 @@ BuildRequires:	pkgconfig(libdv)
 BuildRequires:	pkgconfig(liblircclient0)
 BuildRequires:	libv4l-devel
 BuildRequires:	x11-server-common
-BuildRequires:	pkgconfig(xp)
 
 Requires:	common-licenses
 Requires:	xawtv-common = %{version}
@@ -171,7 +171,7 @@ Subpage "00" can be used for pages without subpages.
 
 %prep
 %setup -q
-%patch31 -p0
+%apply_patches
 
 %build
 autoreconf -fi

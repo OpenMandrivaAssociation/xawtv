@@ -1,0 +1,11 @@
+--- xawtv-3.102/Makefile.in.bero	2013-03-01 03:02:07.229315792 +0100
++++ xawtv-3.102/Makefile.in	2013-03-01 03:02:19.893157473 +0100
+@@ -39,7 +39,7 @@ LIB_FLAGS	:= -I. -I./vbistuff -I./x11 \
+ # various libraries
+ ATHENA_LIBS	:= @X_LIBS@ @XFT_LIBS@ @LIBS@ @ATHENA@
+ MOTIF_LIBS	:= @X_LIBS@ @XFT_LIBS@ @LIBS@ -lXm -lXmu -lXt @X_PRE_LIBS@ \
+-		   -lXp -lXpm -lXext -lX11 @X_EXTRA_LIBS@
++		   -lXpm -lXext -lX11 @X_EXTRA_LIBS@
+ THREAD_LIBS	:= @LIBPTHREAD@
+ CURSES_LIBS	:= @LIBCURSES@
+ LIRC_LIBS	:= @LIRC@

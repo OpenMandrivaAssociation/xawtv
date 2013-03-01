@@ -1,5 +1,5 @@
---- libng/plugins/snd-oss.c.orig	2011-04-02 09:59:50.000000000 +0200
-+++ libng/plugins/snd-oss.c	2011-04-02 10:00:09.000000000 +0200
+--- xawtv/libng/plugins/snd-oss.c.orig	2011-04-02 09:59:50.000000000 +0200
++++ xawtv/libng/plugins/snd-oss.c	2011-04-02 10:00:09.000000000 +0200
 @@ -342,7 +342,7 @@
      memset(h,0,sizeof(*h));
  
