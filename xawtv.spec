@@ -1,11 +1,12 @@
 # FIXME: Workaround build errors with underlinking, try to make a proper
 # fix later
 %define _disable_ld_no_undefined 1
+%define _disable_lto 1
 
 Summary:	A X11 program for watching TV
 Name:		xawtv
 Version:	3.102
-Release:	11
+Release:	12
 Group:		Video
 License:	GPL
 #OLD_STILL_VALID_URLs: http://www.strusel007.de/linux/xawtv/
