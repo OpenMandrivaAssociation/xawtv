@@ -5,7 +5,7 @@
 Summary:	A X11 program for watching TV
 Name:		xawtv
 Version:	3.102
-Release:	10
+Release:	11
 Group:		Video
 License:	GPL
 #OLD_STILL_VALID_URLs: http://www.strusel007.de/linux/xawtv/
@@ -18,7 +18,7 @@ Patch31:	xawtv-3.100-glibc.patch
 BuildRequires:	aalib-devel
 BuildRequires:	gpm-devel
 BuildRequires:	pkgconfig(glu)
-BuildRequires:	lesstif-devel
+BuildRequires:	motif-devel
 BuildRequires:	pkgconfig(alsa)
 BuildRequires:	jpeg-devel
 BuildRequires:	libzvbi-devel >= 0.2.1
@@ -90,7 +90,7 @@ Xawtv is a Video4Linux Stream Capture Viewer, that is a X11 program for
 watching TV.
 
 It uses the Athena widgets.
-MoTV has a nicer GUI which use lesstif (motif) widgets.
+MoTV has a nicer GUI which use motif widgets.
 
 %description	common
 These are common files for fbtv, motv, ttv and xawtv.
