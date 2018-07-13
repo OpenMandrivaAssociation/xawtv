@@ -16,6 +16,7 @@ Source0:	http://linuxtv.org/downloads/xawtv/%{name}-%{version}.tar.bz2
 Source2:	%{name}
 Patch0:		xawtv-3.102-no-libXp.patch
 Patch31:	xawtv-3.100-glibc.patch
+BuildRequires:	pkgconfig(zlib)
 BuildRequires:	aalib-devel
 BuildRequires:	gpm-devel
 BuildRequires:	pkgconfig(glu)
