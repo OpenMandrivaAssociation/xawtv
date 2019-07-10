@@ -5,8 +5,8 @@
 
 Summary:	A X11 program for watching TV
 Name:		xawtv
-Version:	3.102
-Release:	14
+Version:	3.106
+Release:	1
 Group:		Video
 License:	GPL
 #OLD_STILL_VALID_URLs: http://www.strusel007.de/linux/xawtv/
@@ -14,7 +14,6 @@ License:	GPL
 URL:		http://linux.bytesex.org/xawtv/
 Source0:	http://linuxtv.org/downloads/xawtv/%{name}-%{version}.tar.bz2
 Source2:	%{name}
-Patch0:		xawtv-3.102-no-libXp.patch
 Patch31:	xawtv-3.100-glibc.patch
 BuildRequires:	pkgconfig(zlib)
 BuildRequires:	aalib-devel
@@ -37,6 +36,7 @@ BuildRequires:	pkgconfig(xxf86dga)
 BuildRequires:	pkgconfig(xrandr)
 BuildRequires:	pkgconfig(libdv)
 BuildRequires:	pkgconfig(liblircclient0)
+BuildRequires:	pkgconfig(fontconfig)
 BuildRequires:	libv4l-devel
 BuildRequires:	x11-server-common
 
