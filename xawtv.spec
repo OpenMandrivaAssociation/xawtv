@@ -173,7 +173,7 @@ Subpage "00" can be used for pages without subpages.
 
 %prep
 %setup -q
-%apply_patches
+%autopatch -p1
 
 %build
 autoreconf -fi
