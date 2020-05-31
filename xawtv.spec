@@ -5,7 +5,7 @@
 
 Summary:	A X11 program for watching TV
 Name:		xawtv
-Version:	3.106
+Version:	3.107
 Release:	1
 Group:		Video
 License:	GPL
