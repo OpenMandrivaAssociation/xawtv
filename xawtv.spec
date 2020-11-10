@@ -14,6 +14,7 @@ License:	GPL
 URL:		http://linux.bytesex.org/xawtv/
 Source0:	http://linuxtv.org/downloads/xawtv/%{name}-%{version}.tar.bz2
 Source2:	%{name}
+Patch0:		xawtv-3.107-glibc-2.32.patch
 Patch31:	xawtv-3.100-glibc.patch
 BuildRequires:	pkgconfig(zlib)
 BuildRequires:	aalib-devel
@@ -172,13 +173,12 @@ or http://localhost:5654/<page>/<subpage>.html) or in ASCII text format
 Subpage "00" can be used for pages without subpages.
 
 %prep
-%setup -q
-%autopatch -p1
+%autosetup -p1
 
 %build
 autoreconf -fi
 export LIBS="$LIBS -lm"
-%configure2_5x	--enable-xfree-ext \
+%configure	--enable-xfree-ext \
 		--enable-xvideo \
 		--enable-aa \
 		--enable-alsa \
@@ -187,12 +187,12 @@ export LIBS="$LIBS -lm"
 
 # Quicktime support not enabled, so libpng is not needed
 find . -name 'Makefile' | xargs perl -pi -e 's/-lpng//g'
-%make
+%make_build
 
 %install
 perl -pi -e 's!-o root -g root!!g' src/Makefile
 mkdir -p %{buildroot}/usr/lib/X11/app-defaults
-%makeinstall_std ROOT="%{buildroot}" FONTDIR=%{buildroot}%{_datadir}/fonts/misc SUID_ROOT=""
+%make_install ROOT="%{buildroot}" FONTDIR=%{buildroot}%{_datadir}/fonts/misc SUID_ROOT=""
 
 install -m 644 x11/Xawtv.ad %{buildroot}/usr/lib/X11/app-defaults
 (cd %{buildroot}/usr/lib/X11/app-defaults; ln Xawtv.ad Xawtv; ln Xawtv.ad Xawtv-color)
