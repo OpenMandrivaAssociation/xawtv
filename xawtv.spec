@@ -11,7 +11,7 @@ Group:		Video
 License:	GPL
 #OLD_STILL_VALID_URLs: http://www.strusel007.de/linux/xawtv/
 #http://bytesex.org/xawtv/
-URL:		http://linux.bytesex.org/xawtv/
+URL:		https://linux.bytesex.org/xawtv/
 Source0:	http://linuxtv.org/downloads/xawtv/%{name}-%{version}.tar.bz2
 Source2:	%{name}
 Patch0:		xawtv-3.107-glibc-2.32.patch
